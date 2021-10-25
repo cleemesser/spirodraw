@@ -22,14 +22,33 @@ def cycloid(r:float,theta:float):
     y = a* (1-cos(theta))
     return x, y
 
+def prolate_cycloid(a,b,t):
+    """cycloids
+    prolate cycloid b > a   this makes loops and path extendes outside of circle
+    curtate cycloe  b < a   no cusps with this one no loops
+
+    Args:
+        a (float): radius the rolling circle
+        b (float): radius of the spoke (if b < a) or 
+        t (float): rolling parameter each revolution is $2\pi a$
+
+    Returns:
+        (float,float): x, y
+
+    reference: https://mathworld.wolfram.com/ProlateCycloid.html
+    """
+    x = a*t - b * sin(t)
+    y = a - b*cos(t)
+    return x, y
+
 def epicycloid(a:float,b:float, t:float):
     """an epicycloid is a plane curve tracing the path of a circle as it rolls around the outer 
     circumference of a circle see https://en.wikipedia.org/wiki/Epicycloid
 
     Args:
-        a ([float]): radius of the larger circle
-        b ([float]): radius of the smaller circle
-        t ([float]): time parameter indicating how far the outer circle has rolled. 
+        a (float): radius of the larger circle
+        b (float): radius of the smaller circle
+        t (float): time parameter indicating how far the outer circle has rolled. 
                      Every $2b\pi$ the circle rolls one complete time
 
     Returns:
@@ -55,8 +74,12 @@ def hypocycloid(a,b,t):
     Note that the first terms are the equation for circle of radius
     r = (a-b) which describes the movement of the center of the smaller circle
 
+    $$ x = (a-b) \cos(t) + b \cos((a-b)t/b) $$
+    $$ y = (a-b) \sin(t) - b \sin((a-b)t/b) $$
+
+
     Returns:
-        [(float,float)]: x,y vector values in the plane
+        (float,float): x,y vector values in the plane
     
     """
     x = (a-b)*cos(t) + b*cos((a-b)*t/b)

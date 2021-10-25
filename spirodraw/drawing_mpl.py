@@ -5,28 +5,49 @@ import matplotlib.pyplot as pyplot
 from .spirograph_functions import hypocycloid_factory
 
 # %%
+def start_drawing():
+    fig, ax = pyplot.subplots()
+    ax.set_frame_on(False)
+    ax.set_axis_off()
+    ax.set_aspect("equal", "datalim")
+    return fig, ax
+# %% 
+def add_hypocycloid(ax, big_radius, little_radius, t0=0, t1=100.0, steps=10000):
+    ts = np.linspace(t0, t1, steps)
+    x, y = hypocycloid_factory(big_radius, little_radius)
+    xs, ys = x(ts), y(ts)
+    ax.plot(xs, ys)
+    return ax
+
+# %%
 def example_spiro1():
 
     # generate an array of equally spaced time points from 0 to 100
     # to act as the discrete input for the parameterized variable
-
+    fig, ax = start_drawing()
+    
     ts = np.linspace(0, 100.0, 10000)
+    a = 5.0
+    b = 2.0 
+    print(f"drawing hypocycloid with radii {a}, {b}")
+    x, y = hypocycloid_factory(a, b)
 
-    x, y = hypocycloid_factory(5.0, 2.0)
     xs, ys = x(ts), y(ts)
-    # pyplot.plot(xs,ys, aspect=1.0) # not right so set below
-    ax = pyplot.axes()
-    ax.set_aspect("equal", "datalim")
-
-    x, y = hypocycloid_factory(10.0, 2.2)
+    
+    
+    
+    a =10.0
+    b = 2.2
+    print(f"drawing hypocycloid with radii {a}, {b}")
+    x, y = hypocycloid_factory(a, b)
     xs, ys = x(ts), y(ts)
-    pyplot.plot(xs, ys)
+    ax.plot(xs, ys)
 
     x, y = hypocycloid_factory(15.0, 2.13)
     xs, ys = x(ts), y(ts)
-    pyplot.plot(xs, ys)
-    pyplot.axis("off")
-    return ax
+    ax.plot(xs, ys)
+    
+    return fig, ax
 
 
 # %%
