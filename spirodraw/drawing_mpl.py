@@ -33,7 +33,7 @@ def example_spiro1():
     x, y = hypocycloid_factory(a, b)
 
     xs, ys = x(ts), y(ts)
-    
+    ax.plot(xs, ys)
     
     
     a =10.0
@@ -42,7 +42,7 @@ def example_spiro1():
     x, y = hypocycloid_factory(a, b)
     xs, ys = x(ts), y(ts)
     ax.plot(xs, ys)
-
+    print(f"drawing hypocycloid with radii 15.0, 2.13")
     x, y = hypocycloid_factory(15.0, 2.13)
     xs, ys = x(ts), y(ts)
     ax.plot(xs, ys)
@@ -78,7 +78,7 @@ def example_spiro2():
     return fig, ax
 
 
-def example_spiro3():
+def example_random_spiro3():
     """
     generate a random picuture
     """
@@ -87,7 +87,7 @@ def example_spiro3():
     # to act as the discrete input for the parameterized variable
     ts = np.linspace(0, 200.0, 10000)
 
-    N = np.random.random_integers(1, 11)
+    N = np.random.randint(1, 11+1)
 
     fig, ax = pyplot.subplots()
     ax.set_frame_on(False)
