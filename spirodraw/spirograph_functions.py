@@ -58,6 +58,53 @@ def epicycloid(a:float,b:float, t:float):
     y = (a+b)*sin(t) - b * sin((a+b)*t/b)
     return x,y
     
+def hypotrochoid(a,b,d,t):
+    """
+    a is the radius of the base circle
+    q > 1
+    b = a/q that of the rolling circle and
+    d = k b the distance bewteen the point and the center of the moving circle
+    t = time parameter 
+    
+    z = (a-b) exp(i t) + d exp(-i(q-1) t
+
+    x = a( (q-1) cos(t) + k cos(q-1)t )
+    y = a( (q-1) sin(t) -k sin(q-1)t )
+
+    for d=b or k=1, we get the hypocyloids
+    a -> a d/b, b -> (a-b) d/b and d -> (a-b) we get the same curve
+    so can consider only the cases q>=2 
+
+    for q=2, we get the ellipses
+    $$ \frac{x^2}{(1+k)^2} + \frac{y^2}{(1-k)^2} = \frac{a^2}{4} $$
+
+    for q>2 if k<1 : curtate hypocycloid
+    for q>2 if k>1 : prolate hypocycloid
+    (this is reversed for 1 <q<2)
+
+    Hypotrochoids can also be defined as the trajectories of a movement
+    composed of two circlular motions in opposite directions:
+    
+    $$ z = r_1 e^{i w_1 t} + r_2 e^{- w_2 t} $$
+
+    ellipses if:
+       $w_1 = w_2$, 
+
+    prolate hypocycloids if:
+       w_1 > w_2 and r_1 w_1 > r_2 w_2  
+       w_1 < w_2 and r_1 w_1 > r_2 w_2 
+
+    prolate hypocycloids if:
+       w_1 > w_2 and r_1 w_1 < r_2 w_2 or w_1 < w_2 and r_1 w_1 > r_2 w_2 
+
+    https://www.geogebra.org/classic/scmy5ya2    
+    
+    """
+    q = a/b
+    
+    x = a*( (q-1) * cos(t) + k*cos((q-1)*t) )
+    y = a*( (q-1) * sin(t) - k*sin((q-1)*t) )
+    return x,y
 
 
 def hypocycloid(a,b,t):
@@ -80,11 +127,18 @@ def hypocycloid(a,b,t):
 
     Returns:
         (float,float): x,y vector values in the plane
-    
+
+
+    in geogebra: Curve((a-b) cos(t)+b cos((a-b)*((t)/(b))),(a-b) sin(t)-b sin((a-b)*((t)/(b))),t,0,t1)
+    https://www.geogebra.org/classic/pa8pv8jk
+    double spirograph2
+
+    https://www.geogebra.org/classic/ag6pc795  -  spirograph4 (adds derivative)
     """
     x = (a-b)*cos(t) + b*cos((a-b)*t/b)
     y = (a-b)*sin(t) - b*sin((a-b)*t/b)
     return x,y
+
 
 def hypocycloid_factory(a,b):
     """

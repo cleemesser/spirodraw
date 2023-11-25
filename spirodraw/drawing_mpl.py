@@ -180,7 +180,7 @@ def spiro5():
         
 
 
-def spiro_random():
+def spiro_random(N=12):
     """
     generate a random picuture
     """
@@ -189,16 +189,17 @@ def spiro_random():
     # to act as the discrete input for the parameterized variable
     ts = np.linspace(0, 200.0, 10000)
 
-    N = 12
     print("Making a figure with %d hypocycloids..." % N)
     fig, ax = pyplot.subplots()
     ax.set_frame_on(False)
     ax.set_axis_off()
     ax.set_aspect("equal", "datalim")
-
+    
     for ii in range(N):
-        a = 10.0 * np.random.ranf()
-        b = 5.0 * np.random.ranf()
+        scale = 3*(ii+1)/N # make it so they get bigger as you make more
+        a = int(scale* np.random.randint(3,17))
+        b = int(scale* np.random.randint(2,15))
+        print(a,b)
         # a = safe_float_input("enter a value for the larger circle radius (a): ")
         # b = safe_float_input("enter a value for the smaller circle radius (b): ")
         x, y = hypocycloid_factory(a, b)
